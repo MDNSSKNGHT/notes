@@ -1,10 +1,10 @@
 #import "math.typ": *
 
 = Transformaciones Lineales
-
 #definition[
   Sean $U$ y $V$ dos $KK$-espacios vectoriales, una función $
     T : U -> V $ es una transformación lineal si se cumple
+
   - $forall vu, vv in V : T(vu + vv) = T(vu) + T(vv)$.
   - $forall lambda in KK, forall vu in V: T(lambda vu) = lambda T(vu)$.
 ]
@@ -20,8 +20,8 @@
 ]
 #proof[
   Dados $vu, vv in ker(T)$ $ forall alpha, beta in KK:
-    T( alpha vu + beta vv ) & = alpha T(vu) + beta T(vv) \
-                            & = v0                       \
+    T( alpha vu + beta vv ) &= alpha T(vu) + beta T(vv) \
+                            &= v0                       \
        alpha vu + beta vv   & in ker(T) -> ker(T) < U $
 ]
 
@@ -32,8 +32,8 @@
   Dados $vu', vv' in im(T)$, existen $vu, vv in U$ tal que
   $vu' = T(vu)$ y $vv' = T(vv)$, luego $
     forall alpha, beta in KK:
-      alpha vu' + beta vv' & =    alpha T(vu) + beta T(vv)  \
-                           & = T( alpha vu + beta vv )      \
+      alpha vu' + beta vv' &=    alpha T(vu) + beta T(vv)  \
+                           &= T( alpha vu + beta vv )      \
     alpha vu' + beta vv'   & in im(T) -> im(T) < V $
 ]
 #lemma[
@@ -44,8 +44,8 @@
   ${ T(vu_1), ..., T(vu_k) } subset V$
   $
     forall vv in V, exists vu in U:
-           vv & = T(vu)                              \
-           vv & = T( sum _(i=1)^k alpha_i vu_i ),
+           vv &= T(vu)                              \
+           vv &= T( sum _(i=1)^k alpha_i vu_i ),
             { alpha_i } _(i=1)^k subset KK           \
            vv &= sum _(i=1) ^k alpha_i T (vu_i), $ el
   conjunto ${ T(vu_1), ..., T(vu_k) }$ es l.i. ya que genera $V$.
@@ -78,6 +78,7 @@
 
 #definition[
   Sea $T: U -> V$ una transformación lineal, se dice que $T$ es
+
   - monomorfismo si $T$ es inyectiva.
   - epimorfismo si $T$ es sobreyectiva.
   - isomorfimo si $T$ es biyectiva.
@@ -92,40 +93,43 @@
   $
 ]
 #proof[
-  Empecemos por la existencia. Sea $vv in V$, como $B$ es base de $V$
-  entonces $
+  Sea $vv in V$, como $B$ es base de $V$ 
+  $
     exists { alpha_i } _(i=1) ^n subset KK mid(|)
       vu = sum _(i=1)^n alpha_i vv_i,
   $ definamos $
     T: U & -> V \
       underbrace(vu, sum _(i=1)^n alpha_i vv_i)
-      &  arrow.r.bar sum _(i=1)^n alpha_i vw_i, $
-  tenemos que demostrar la buena definición de $T$,
-  $forall vv, vv' in V mid(|) vv = vv'$ se tiene
-  $
-      vv  = sum _(i=1)^n  alpha  _i vv_i & and
-      vv' = sum _(i=1)^n  alpha' _i vv_i                 \
-            sum _(i=1)^n (alpha_i - alpha'_i) vv_i = v0
-               & -> alpha_i = alpha'_i, forall i in I_n  \
-      vv = vv' & -> T(vv) = T(vv')
-  $ y ahora se debe demostrar que $T$ es una transformación lineal
-  $
+           &  mapsto sum _(i=1)^n alpha_i vw_i.
+  $ Se cumple la unicidad de $T$. En efecto, $ 
+    forall vv, vv' in V mid(|) vv = vv':
+    vv  = sum _(i=1)^n  alpha  _i vv_i & and
+    vv' = sum _(i=1)^n  alpha' _i vv_i,
+  $ implica $
+    sum _(i=1)^n (alpha_i - alpha'_i) vv_i = v0
+    & -> alpha_i = alpha'_i, forall i in I_n,
+  $ por consiguiente $
+    T(vv) = T(sum _(i=1)^n alpha  _i vv_i)
+          = T(sum _(i=1)^n alpha' _i vv_i)
+          = T(vv'). $
+  $T$ es una transformación lineal. En efecto, $
     T( lambda_1 vv + lambda_2 vv' ) &= T(
        lambda_1 sum _(i=1)^n alpha  _i vv_i +
        lambda_2 sum _(i=1)^n alpha' _i vv_i )                            \
-    & = T( sum _(i=1)^n (lambda_1 alpha_i  + lambda _2 alpha' _i) vv_i ) \
-    & =    sum _(i=1)^n (lambda_1 alpha_i  + lambda _2 alpha' _i) vw_i   \
-    & =    lambda_1 sum _(i = 1)^n alpha  _i vw_i +
+    &= T( sum _(i=1)^n (lambda_1 alpha_i  + lambda _2 alpha' _i) vv_i )  \
+    &=    sum _(i=1)^n (lambda_1 alpha_i  + lambda _2 alpha' _i) vw_i    \
+    &=    lambda_1 sum _(i = 1)^n alpha  _i vw_i +
            lambda_2 sum _(i = 1)^n alpha' _i vw_i                        \
-    & = lambda_1 T(vv) + lambda_2 T(vv')
-  $ ahora nos quedaría demostrar que $T$ es único, supongamos que
-  existe $T': U -> V$ tal que $T'(vv_i) &= vw_i$
+    &= lambda_1 T(vv) + lambda_2 T(vv'). $ 
+  $T$ es único. En efecto, supongamos que existe $T': U -> V$ tal
+  que $T'(vv_i) &= vw_i,$
   $
-    T'(vu) = T'( sum _(i=1) ^k alpha _i vv_i )
-      = sum _(i=1)^k alpha_i T' (vv_i) 
-      = sum _(i=1)^k alpha_i     vw_i
-      = sum _(i=1)^k alpha_i T  (vv_i)
-      = T( sum _(i=1)^k alpha_i vv_i ) = T(vu)
+    T'(vu) &= T'( sum _(i=1) ^k alpha _i vv_i )      \
+      &= sum _(i=1)^k alpha_i T' (vv_i)              \
+      &= sum _(i=1)^k alpha_i     vw_i               \
+      &= sum _(i=1)^k alpha_i T  (vv_i)              \
+      &= T( sum _(i=1)^k alpha_i vv_i )              \
+      &= T(vu)
   $
 ]
 
@@ -150,11 +154,54 @@
 #proof[
   Probemos que el conjunto es l.i., supongamos $exists { alpha _i }
   _(i=1) ^n subset KK$ tal que $
-         sum _(i=k+1)^n alpha_i T(vu_i) &= v0 \
-      T( sum _(i=k+1)^n alpha_i vu_i)   &= v0
-      -> sum _(i=k+1)^n alpha_i vu_i in ker(T) \
-         sum _(i=k+1)^n alpha_i vu_i    & = sum_(i=1)^k beta_i vu_i \
-         sum _(i=1)^n (-beta_i) vu_i +
-         sum _(i=k+1)^n alpha_i vu_i    & = v0 -> alpha_i = beta_i = 0
-          " para sus índices respectivos" $
+       sum _(i=k+1)^n alpha_i T(vu_i) &= v0 \
+    T( sum _(i=k+1)^n alpha_i vu_i )  &= v0
+    -> sum _(i=k+1)^n alpha_i vu_i in ker(T) \
+       sum _(i=k+1)^n alpha_i vu_i    &= sum_(i=1)^k beta_i vu_i \
+       sum _(i=1)^n (-beta_i) vu_i +
+       sum _(i=k+1)^n alpha_i vu_i    &= v0
+    -> alpha_i = 0 and beta_i = 0
+  $ en sus repectivos índices. Veamos si el conjunto genera
+  a $im(T)$, sea $vv in im(T)$ existe $vu in U$ tal que $vv = T(vu)$
+  $
+    { alpha_i } _(i=1)^n subset KK: 
+    T(vu) &= T( sum _(i=1)^n alpha_i vu_i )      \
+          &=    sum _(i=1)^n alpha_i T(vu_i)     \
+          &=    sum _(i=1)^k alpha_i T(vu_i) +
+                sum _(i=k+1)^n alpha_i T(vu_i)   \
+          &=    sum _(i=k+1)^n alpha_i T(vu_i)
+  $
+]
+
+== Teorema fundamental de las transformaciones lineales
+#theorem[
+  Dados $U, V$ ambos $KK$-espacios vectoriales y $T: U -> V$ transformación
+  lineal, se cumple $
+    frac(U, ker(T)) tilde.eq im(T) 
+  $
+
+  #remark[
+    La notación $tilde.eq$ indica que existe un isomorfimo entre ambos.
+  ]
+]
+#proof[
+  Definmos $
+    f: frac(U, ker(T)) & -> V, quad [vu] mapsto T(vu). $
+  $f$ está bien definido. En efecto, $
+    [vu] = [vv] & ->   vu - vv in ker(T)  \
+                & -> T(vu - vv) = v0      \
+                & ->  T(vu)  =  T(vv)     \
+                & -> f([vu]) = f([vv]). $
+  $f$ es una transformación lineal. En efecto, $
+    f(alpha [vu] + beta [vv]) &= f([alpha vu + beta vv]) \
+    &= T(alpha vu + beta vv) \
+    &= alpha T(vu) + beta T(vv) \
+    &= alpha f([vu]) + beta f([vu]). $
+  $f$ es inyectivo. En efecto, $
+    f([vu]) = f([vv]) &-> T(vu) = T(vv) \
+    T(vu) - T(vv) = T(vu - vv) = v0 &-> vu - vv in ker(T) \
+    vu tilde.op vv &-> [vu] = [vv].
+  $ Obtenemos $
+    frac(U, ker(T)) tilde.eq im(f) = im(T)
+  $
 ]

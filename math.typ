@@ -39,7 +39,7 @@
 #let example = thmplain("example", "Ejemplo").with(numbering: none)
 #let remark = thmplain(
   "remark",
-  "Remark",
+  "Observación",
   inset: 0em,
 ).with(numbering: none)
 
