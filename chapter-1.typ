@@ -185,7 +185,7 @@
   ]
 ]
 #proof[
-  Definmos $
+  Definimos $
     f: frac(U, ker(T)) & -> V, quad [vu] mapsto T(vu). $
   $f$ está bien definido. En efecto, $
     [vu] = [vv] & ->   vu - vv in ker(T)  \
